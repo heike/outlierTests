@@ -66,7 +66,7 @@ grubbsTest <- function(x, alternative = c("max", "min", "two.sided"),
   structure(list(statistic = list(G = G),
                  parameter = list(df = n, sigma = sd(x)),
                  p.value = p.value,
-                 estimate = list(max = max(x)),
+                 estimate = c(`G1 (min)` = abs(G1), `Gn (max)` = Gn),
                  method = "Grubbs test for one Outlier", critical = Ga, alpha = alpha,
                  alternative = alternative_msg,
                  data.name = DNAME), class = c("htest", "grubbs"))
