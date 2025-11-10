@@ -3,7 +3,8 @@ test_that("check Grubbs Test", {
   x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
   t1_one <- grubbsTest(x, alpha = 0.05, alternative = "max")
 
-  expect_in("grubbsTest", class(t1_one))
+  expect_in("htest", class(t1_one))
+  expect_in("grubbs", class(t1_one))
   expect_equal(t1_one$parameter$df, length(x))
   expect_equal(t1_one$parameter$sigma, sd(x))
   expect_equal(round(t1_one$statistic, digits=6), 2.468765)
