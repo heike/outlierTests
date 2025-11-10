@@ -7,6 +7,7 @@
 #' @param alternative character value  specifying the alternative hypothesis.
 #' It must be one of "max" (default), "min" or "two.sided".
 #' @param alpha significance level for the rejection, acceptable Type 1 error.
+#' @returns object of class `htest` (hypothesis test), i.e. list with test-specific estimates, critical values and messages.
 #' @references
 #' Grubbs, F. (1950).
 #' *Sample Criteria for Testing Outlying Observations.*
@@ -15,8 +16,8 @@
 #' @export
 #' @examples
 #' # example code
-#' x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
-#' grubbsTest(x)
+#' iso <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
+#' grubbsTest(iso)
 grubbsTest <- function(x, alternative = c("max", "min", "two.sided"),
                        alpha = 0.05) {
   stopifnot(is.numeric(x),
@@ -25,6 +26,8 @@ grubbsTest <- function(x, alternative = c("max", "min", "two.sided"),
 
   if (any(is.na(x)))
     warning(sprintf("ignoring %d missing values", sum(is.na(x))))
+
+  DNAME <- deparse(substitute(x))
 
   x <- na.omit(x)
   n <- length(x)
@@ -41,24 +44,32 @@ grubbsTest <- function(x, alternative = c("max", "min", "two.sided"),
   Gn <- (xn - mu)/s
   G = max(-G1, Gn)
 
+
   if (alternative == "two.sided") {
     p.value = pGrubbs(G, n, two.sided = FALSE)
     p.value <- 2*pmin(p.value, 1- p.value)
+    alternative_msg <- "Either the maximum or the minimum is an outlier."
   }
   if (alternative == "max") {
     p.value = pGrubbs(G, n, two.sided = FALSE)
     if (Gn < -G1) p.value <- 1 - p.value
+    alternative_msg <- "The maximum is an outlier."
   }
   if (alternative == "min") {
     p.value = 1-pGrubbs(G, n, two.sided = FALSE)
     Ga <- -Ga
     if (G1 < -Gn) p.value <- 1 - p.value
+    alternative_msg <- "The minimum is an outlier."
   }
 
-  structure(list(statistic = G,
+
+  structure(list(statistic = list(G = G),
                  parameter = list(df = n, sigma = sd(x)),
                  p.value = p.value,
                  estimate = list(max = max(x)),
-                 method = "Grubbs test", critical = Ga, alpha = alpha,
-                 alternative = alternative), class = "grubbsTest")
+                 method = "Grubbs test for one Outlier", critical = Ga, alpha = alpha,
+                 alternative = alternative_msg,
+                 data.name = DNAME), class = c("htest", "grubbs"))
 }
+
+
