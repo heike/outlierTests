@@ -7,41 +7,59 @@ The goal of outlierTests is to …
 You can install the development version of outlierTests like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+remotes::install_github("heike/outlierTests")
+#> Using GitHub PAT from the git credential store.
+#> Skipping install of 'outlierTests' from a github remote, the SHA1 (c0867832) has not changed since last install.
+#>   Use `force = TRUE` to force installation
 ```
 
 ## Example
 
 This is a basic example which shows you how to solve a common problem:
 
-``` r
-library(outlierTests)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+From the NIST [Engineering Statistics
+Handbook](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h1.htm):
+the following set of 8 numbers are mass spectrometer measurements on a
+uranium isotope (Tietjen and
+Moore)\[doi/abs/10.1080/00401706.1972.10488948\]:
 
 ``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
+x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
+grubbsTest(x)
+#> $statistic
+#> [1] 2.468765
+#> 
+#> $parameter
+#> $parameter$df
+#> [1] 8
+#> 
+#> $parameter$sigma
+#> [1] 15.85256
+#> 
+#> 
+#> $p.value
+#> [1] 1.547663e-07
+#> 
+#> $estimate
+#> $estimate$max
+#> [1] 245.57
+#> 
+#> 
+#> $method
+#> [1] "Grubbs test"
+#> 
+#> $critical
+#> [1] 2.031652
+#> 
+#> $alpha
+#> [1] 0.05
+#> 
+#> $alternative
+#> [1] "max"
+#> 
+#> attr(,"class")
+#> [1] "grubbsTest"
 ```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-![](reference/figures/README-pressure-1.png)
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
 
 # Package index
 
