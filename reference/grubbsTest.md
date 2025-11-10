@@ -37,37 +37,15 @@ Grubbs, F. (1950). *Sample Criteria for Testing Outlying Observations.*
 # example code
 x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
 grubbsTest(x)
-#> $statistic
-#> [1] 2.468765
 #> 
-#> $parameter
-#> $parameter$df
-#> [1] 8
+#>  Grubbs test for one Outlier
 #> 
-#> $parameter$sigma
-#> [1] 15.85256
-#> 
-#> 
-#> $p.value
-#> [1] 1.547663e-07
-#> 
-#> $estimate
-#> $estimate$max
+#> data:  x
+#> G = 2.4688, df = 8, sigma = 15.853, p-value = 1.548e-07
+#> alternative hypothesis: The maximum is an outlier.
+#> sample estimates:
+#> $max
 #> [1] 245.57
 #> 
 #> 
-#> $method
-#> [1] "Grubbs test"
-#> 
-#> $critical
-#> [1] 2.031652
-#> 
-#> $alpha
-#> [1] 0.05
-#> 
-#> $alternative
-#> [1] "max"
-#> 
-#> attr(,"class")
-#> [1] "grubbsTest"
 ```
