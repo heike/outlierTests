@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/heike/outlierTests/graph/badge.svg)](https://app.codecov.io/gh/heike/outlierTests)
 <!-- badges: end -->
 
-The goal of outlierTests is to ...
+The goal of outlierTests is to provide an R implementation of the GRubbs test with a properly controlled type I error for one sided tests.
 
 ## Installation
 
@@ -46,4 +46,61 @@ iso <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
 grubbsTest(iso)
 ```
 
+## Control of Type I error
+
+```{r}
+set.seed(202511)
+
+results <- data.frame(t(replicate(1000, {
+  x <- rnorm(6, mean = 0.3, sd = 0.6)
+  grubbs1a <- grubbsTest(x, alternative = "max")
+  grubbs1b <- grubbsTest(x, alternative = "min")
+  grubbs1c <- grubbsTest(x, alternative = "two.sided")
+  grubbs2a <- outliers::grubbs.test(x, type = 10, two.sided = FALSE)
+  grubbs2b <- outliers::grubbs.test(x, type = 10, two.sided = TRUE)
+  c("grubbs.max" = grubbs1a$p.value, 
+    "grubbs.min" = grubbs1b$p.value, 
+    "grubbs.twosided" = grubbs1c$p.value, 
+    "grubbs.outliers.onesided" = grubbs2a$p.value,
+    "grubbs.outliers.twosided" = grubbs2b$p.value
+    )
+})))
+```
+
+P-values of 1000 replicates of samples of size 6 from a random normal distribution. 
+
+```{r fig.width=7.5, fig.height=2.5, echo = FALSE, message = FALSE, warning = FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+
+results |> select(!contains("outliers")) |>
+  pivot_longer(cols = !contains("outliers"), 
+               names_to="test", values_to = "p_values") |>
+  ggplot(aes(x = p_values)) +
+    geom_histogram(aes(y = after_stat(..density..)), 
+                   binwidth = 0.05, boundary = 0) + 
+    facet_wrap(~test) +
+    geom_hline(yintercept = 1, colour = "red")
+    
+  
+```
+
+Compare the results to output from the `outliers` package:
+
+```{r fig.width=5, fig.height=2.5, echo = FALSE, message = FALSE, warning = FALSE}
+results |> select(contains("outliers")) |>
+  pivot_longer(cols = contains("outliers"), 
+               names_to="test", values_to = "p_values") |>
+  ggplot(aes(x = p_values)) +
+    geom_histogram(aes(y = after_stat(..density..)), 
+                   binwidth = 0.05, boundary = 0) + 
+    facet_wrap(~test) +
+    geom_hline(yintercept = 1, colour = "red") + 
+  ggtitle("Results from outliers package")
+    
+```
+In the case of a single outlier, the one sided grubbs test in the 
+`outliers` package is not 
+well controlled. 
 

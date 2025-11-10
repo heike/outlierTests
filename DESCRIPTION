@@ -1,11 +1,11 @@
 Package: outlierTests
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Testing for Univariate Outliers
 Version: 0.1.0
 Authors@R: c(
     person(
-      "Jane", "Doe",
-      email = "jane@example.com",
+      "Heike", "Hofmann",
+      email = "hhofmann4@unl.edu",
       role = c("aut", "cre")
     )
   )
