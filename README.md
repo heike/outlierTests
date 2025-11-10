@@ -19,8 +19,19 @@ You can install the development version of outlierTests like so:
 ``` r
 remotes::install_github("heike/outlierTests")
 #> Using GitHub PAT from the git credential store.
-#> Skipping install of 'outlierTests' from a github remote, the SHA1 (c0867832) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo heike/outlierTests@HEAD
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#>      checking for file ‘/private/var/folders/1x/tvy5cf5j4glg4_6g8cxvrcbm7qbgrn/T/RtmpxMOfTQ/remotes86f92eaf351c/heike-outlierTests-3c04915/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/1x/tvy5cf5j4glg4_6g8cxvrcbm7qbgrn/T/RtmpxMOfTQ/remotes86f92eaf351c/heike-outlierTests-3c04915/DESCRIPTION’
+#>   ─  preparing ‘outlierTests’:
+#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>      Omitted ‘LazyData’ from DESCRIPTION
+#>   ─  building ‘outlierTests_0.1.0.tar.gz’
+#>      Warning: invalid uid value replaced by that for user 'nobody'
+#>    Warning: invalid gid value replaced by that for user 'nobody'
+#>      
+#> 
 ```
 
 ## Example
@@ -34,39 +45,15 @@ uranium isotope (Tietjen and
 Moore)\[doi/abs/10.1080/00401706.1972.10488948\]:
 
 ``` r
-x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
-grubbsTest(x)
-#> $statistic
-#> [1] 2.468765
+iso <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
+grubbsTest(iso)
 #> 
-#> $parameter
-#> $parameter$df
-#> [1] 8
+#>  Grubbs test for one Outlier
 #> 
-#> $parameter$sigma
-#> [1] 15.85256
-#> 
-#> 
-#> $p.value
-#> [1] 1.547663e-07
-#> 
-#> $estimate
-#> $estimate$max
-#> [1] 245.57
-#> 
-#> 
-#> $method
-#> [1] "Grubbs test"
-#> 
-#> $critical
-#> [1] 2.031652
-#> 
-#> $alpha
-#> [1] 0.05
-#> 
-#> $alternative
-#> [1] "max"
-#> 
-#> attr(,"class")
-#> [1] "grubbsTest"
+#> data:  iso
+#> G = 2.4688, df = 8, sigma = 15.853, p-value = 1.548e-07
+#> alternative hypothesis: The maximum is an outlier.
+#> sample estimates:
+#>  G1 (min)  Gn (max) 
+#> 0.4493752 2.4687646
 ```

@@ -24,7 +24,7 @@ The goal of outlierTests is to ...
 
 ## Installation
 
-You can install the development version of outlierTests like so:
+You can install the development version of `outlierTests` like so:
 
 ```{r}
 remotes::install_github("heike/outlierTests")
@@ -42,8 +42,8 @@ library(outlierTests)
 From the NIST [Engineering Statistics Handbook](https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h1.htm):  the following set of 8 numbers are mass spectrometer measurements on a uranium isotope (Tietjen and Moore)[doi/abs/10.1080/00401706.1972.10488948]:
 
 ```{r example}
-x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
-grubbsTest(x)
+iso <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
+grubbsTest(iso)
 ```
 
 
