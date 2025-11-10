@@ -4,7 +4,15 @@
 \alias{grubbsTest}
 \title{Grubbs Test for one outlier in a normal sample}
 \usage{
-grubbsTest(x, alternative = c("max", "min", "two.sided"), conf.level = 0.95)
+grubbsTest(x, alternative = c("max", "min", "two.sided"), alpha = 0.05)
+}
+\arguments{
+\item{x}{vector of normally distributed data values}
+
+\item{alternative}{character value  specifying the alternative hypothesis.
+It must be one of "max" (default), "min" or "two.sided".}
+
+\item{alpha}{significance level for the rejection, acceptable Type 1 error.}
 }
 \description{
 The original paper states to reject the absolute maximum deviate G
@@ -15,4 +23,10 @@ two sided tests.
 # example code
 x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
 grubbsTest(x)
+}
+\references{
+Grubbs, F. (1950).
+\emph{Sample Criteria for Testing Outlying Observations.}
+\emph{Annals of Mathematical Statistics,} 21(1), 27–58.
+\url{https://doi.org/10.1214/aoms/1177729885}
 }

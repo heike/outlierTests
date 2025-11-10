@@ -22,11 +22,15 @@ pGrubbs(x, n, two.sided, lower.tail = FALSE)
 \item{x}{vector of quantiles.}
 }
 \description{
-Quantile function and distribution function for Grubbs G distribution.
+Quantile function and distribution function for the extreme absolute deviate G of a
+normal sample defined as \eqn{ G = \max (G_1, G_n),}
+where \eqn{G_i = \frac{|x_{(i)} - \bar{x}|}{s}} for an ordered sample of
+\eqn{x_{i}} with \eqn{x_{(1)} \le x_{(2)} \le ... \le x_{(n)}}.
+\eqn{\bar{x}} and \eqn{s^2} are sample mean and variance defined as
+\deqn{\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i text{ and } s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2.}
 }
-\references{
-Grubbs, F. (1950).
-\emph{Sample Criteria for Testing Outlying Observations.}
-\emph{Annals of Mathematical Statistics,} 21(1), 27–58.
-\url{https://doi.org/10.1214/aoms/1177729885}
+\details{
+The quantile and distribution function is derived from
+rejecting
+\deqn{}
 }

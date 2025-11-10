@@ -1,17 +1,23 @@
 #' The Grubbs G Distribution
 #'
-#' Quantile function and distribution function for Grubbs G distribution.
+#' Quantile function and distribution function for the extreme absolute deviate G of a
+#' normal sample defined as \eqn{ G = \max (G_1, G_n),}
+#' where \eqn{G_i = \frac{|x_{(i)} - \bar{x}|}{s}} for an ordered sample of
+#' \eqn{x_{i}} with \eqn{x_{(1)} \le x_{(2)} \le ... \le x_{(n)}}.
+#' \eqn{\bar{x}} and \eqn{s^2} are sample mean and variance defined as
+#' \deqn{\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i text{ and } s^2 = \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar{x})^2.}
+#' @details
+#' The quantile and distribution function is derived from
+#' rejecting
+#' \deqn{}
 #' @param p vector of probabilities.
 #' @param x vector of quantiles.
 #' @param n sample size.
 #' @param two.sided logical; if TRUE, an outlier can be either a minimum or a maximum.
 #' @param lower.tail logical; if FALSE (default), probabilities are
 #' \eqn{P(G > g)}, otherwise \eqn{P(G \le g)}.
-#' @references
-#' Grubbs, F. (1950).
-#' *Sample Criteria for Testing Outlying Observations.*
-#' *Annals of Mathematical Statistics,* 21(1), 27–58.
-#' [https://doi.org/10.1214/aoms/1177729885](https://doi.org/10.1214/aoms/1177729885)
+#' @importFrom stats qt na.omit sd uniroot
+#' @export
 qGrubbs <- function(p, n, two.sided, lower.tail = FALSE) {
   denom <- n
   if (two.sided) denom <- denom*2
