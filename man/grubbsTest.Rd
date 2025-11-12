@@ -14,6 +14,9 @@ It must be one of "max" (default), "min" or "two.sided".}
 
 \item{alpha}{significance level for the rejection, acceptable Type 1 error.}
 }
+\value{
+object of class \code{htest} (hypothesis test), i.e. list with test-specific estimates, critical values and messages.
+}
 \description{
 The original paper states to reject the absolute maximum deviate G
 at a significance level of alpha/n for one-sided tests and alpha/(2n) for
@@ -21,8 +24,8 @@ two sided tests.
 }
 \examples{
 # example code
-x <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
-grubbsTest(x)
+iso <- c(199.31, 199.53, 200.19, 200.82, 201.92, 201.95, 202.18, 245.57)
+grubbsTest(iso)
 }
 \references{
 Grubbs, F. (1950).
