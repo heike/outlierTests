@@ -20,8 +20,19 @@ You can install the development version of `outlierTests` like so:
 ``` r
 remotes::install_github("heike/outlierTests")
 #> Using GitHub PAT from the git credential store.
-#> Skipping install of 'outlierTests' from a github remote, the SHA1 (65f7cfc0) has not changed since last install.
-#>   Use `force = TRUE` to force installation
+#> Downloading GitHub repo heike/outlierTests@HEAD
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#>      checking for file ‘/private/var/folders/1x/tvy5cf5j4glg4_6g8cxvrcbm7qbgrn/T/Rtmppmot4W/remotes7f9f37fb5081/heike-outlierTests-3b16731/DESCRIPTION’ ...  ✔  checking for file ‘/private/var/folders/1x/tvy5cf5j4glg4_6g8cxvrcbm7qbgrn/T/Rtmppmot4W/remotes7f9f37fb5081/heike-outlierTests-3b16731/DESCRIPTION’
+#>   ─  preparing ‘outlierTests’:
+#>      checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>   ─  checking for LF line-endings in source and make files and shell scripts
+#>   ─  checking for empty or unneeded directories
+#>      Omitted ‘LazyData’ from DESCRIPTION
+#>   ─  building ‘outlierTests_0.1.0.tar.gz’
+#>      Warning: invalid uid value replaced by that for user 'nobody'
+#>    Warning: invalid gid value replaced by that for user 'nobody'
+#>      
+#> 
 ```
 
 ## Example
